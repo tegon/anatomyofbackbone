@@ -85,3 +85,15 @@ h3 a:focus {
 .complete a {
   color: #bbb;
 }
+
+input.edit {
+  display: none;
+}
+
+.editing label {
+  display: none;
+}
+
+input.editing {
+  display: inline;
+}

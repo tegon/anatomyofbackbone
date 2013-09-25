@@ -7,5 +7,9 @@ window.TodoItem = Backbone.Model.extend({
     }
 
     this.save();
+  },
+  changeDescription: function(description){
+    this.set({'description': description})
+    this.save();
   }
 });

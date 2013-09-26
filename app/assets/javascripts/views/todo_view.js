@@ -1,16 +1,17 @@
 window.TodoView = Backbone.View.extend({
-  template: _.template('<h3 class="<%= status %>"><input class="toggle" type=checkbox <%= status == "complete" ? "checked=checked" : "" %>/> <label><%= description %></label><input class="edit" value="<%= description %>"> <a href="/#todos/<%= id %>">☞</a></h3>'),
+  template: _.template('<h3 class="<%= status %>"><input class="toggle" type=checkbox <%= status == "complete" ? "checked=checked" : "" %>/> <label><%= description %></label><input class="edit" value="<%= description %>"> <a href="/#todos/<%= id %>">☞</a></h3><button class="destroy">remove</button>'),
 
   events: {
     'click .toggle': 'toggleStatus',
     'dblclick label': 'edit',
     'keypress .edit': 'updateOnEnter',
-    'blur .edit': 'close'
+    'blur .edit': 'close',
+    'click .destroy': 'destroy'
   },
 
   initialize: function(){
     this.model.on('change', this.render, this);
-    this.model.on('destroy hide', this.remove, this);
+    this.model.on('destroy', this.remove, this);
   },
 
   edit: function(){
@@ -44,6 +45,10 @@ window.TodoView = Backbone.View.extend({
 
   toggleStatus: function(){
     this.model.toggleStatus()
+  },
+
+  destroy: function(){
+    this.model.destroy();
   }
 });
 
